@@ -1,0 +1,17 @@
+[Unit]
+Description=Catalog Service
+After=network.target
+
+[Service]
+Type=simple
+User=ec2-user
+WorkingDirectory=/var/www/catalog-service
+EnvironmentFile=/var/www/catalog-service/.env
+ExecStart=/usr/bin/node /var/www/catalog-service/dist/index.js
+Restart=always
+RestartSec=5
+KillSignal=SIGTERM
+TimeoutStopSec=20
+
+[Install]
+WantedBy=multi-user.target
