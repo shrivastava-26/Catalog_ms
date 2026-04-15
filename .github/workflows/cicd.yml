@@ -30,9 +30,10 @@ jobs:
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
           source: "dist,package.json,package-lock.json"
-          target: "/var/www/catalog-service"
+          target: "/home/ec2-user/catalog-service"
 
       - name: Deploy on EC2
         uses: appleboy/ssh-action@v1.2.0
@@ -41,7 +42,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           script: |
-            cd /var/www/catalog-service
+            cd /home/ec2-user/catalog-service
             npm ci --omit=dev
             sudo systemctl restart catalog-service
             sudo systemctl status catalog-service --no-pager
