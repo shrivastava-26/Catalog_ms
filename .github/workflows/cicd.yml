@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20   # fix warning you saw
           cache: npm
 
       - name: Install dependencies
@@ -43,6 +43,6 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd /home/ec2-user/catalog-service
+            pkill node || true
             npm ci --omit=dev
-            sudo systemctl restart catalog-service
-            sudo systemctl status catalog-service --no-pager
+            nohup node dist/app/server.js > output.log 2>&1 &
