@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "tsx watch src/app/server.ts",
-    "build": "esbuild src/app/server.ts --bundle --platform=node --target=node18 --outfile=dist/app/server.js",
+    "build": "esbuild src/app/server.ts --bundle --platform=node --target=node18 --format=esm --packages=external --outfile=dist/app/server.js",
     "start": "node dist/app/server.js",
     "start:prod": "NODE_ENV=production node dist/app/server.js",
     "typecheck": "tsc --noEmit",
