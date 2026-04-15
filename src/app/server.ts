@@ -96,16 +96,16 @@ import { express } from 'express';
 // });
 
 
+import express, { Request, Response } from "express";
 
-import express from 'express'
-const app = express()
+const app = express();
 
+app.get("/", (req: Request, res: Response) => {
+  res.send("Hello from EC2");
+});
 
-app.use('/', (req,res)=>{
-    res.status(201).json({message:"hello its running"})
-})
+const PORT = Number(process.env.PORT) || 3000;
 
-
-app.listen(3000, ()=>{
-    console.log('on port 3000')
-})
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
+});
