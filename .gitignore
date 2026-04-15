@@ -7,3 +7,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .github
+src/middleware
+src/app/server.ts
+src/middleware
